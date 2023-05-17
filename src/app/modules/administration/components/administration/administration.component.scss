@@ -1,0 +1,40 @@
+@import "../../../../styles/shared_variables";
+@import "../../../../styles/mixins";
+
+.administration-outer-wrap {
+
+	@include contentPadding();
+
+	.administration-overview {
+
+		ul {
+			margin: 0;
+			padding: 0;
+
+			li {
+
+				list-style-type: none;
+				margin: 0;
+				padding: 0;
+
+				@include addMarginBottom();
+
+				.administration-overview-list-link {
+					display: flex;
+					flex-direction: row;
+					flex-wrap: nowrap;
+					align-content: center;
+					justify-content: flex-start;
+					align-items: center;
+
+					text-decoration: none;
+
+					.administration-overview-list-link-text {
+						text-decoration: underline;
+						padding-left: 6px;
+					}
+				}
+			}
+		}
+	}
+}

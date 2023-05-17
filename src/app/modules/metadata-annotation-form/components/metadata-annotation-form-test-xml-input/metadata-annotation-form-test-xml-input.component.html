@@ -1,0 +1,127 @@
+<div class="metadata-annotation-form-outer-wrap">
+	<ng-container *ngIf="loadingService.isLoading$ | async">
+		<app-loading-screen [textUpper]="'Generating form'" [textLower]="'Please wait...'"></app-loading-screen>
+	</ng-container>
+
+	<div class="metadata-annotation-form-menu-wrap">
+		<div class="metadata-annotation-form-menu">
+			<div class="metadata-annotation-form-menu-schemas">
+				<button
+					data-tab="settings"
+					class="tablink active"
+					(click)="onClickTab('settings')"
+					[hidden]="hideSettings"
+				>
+					Settings
+				</button>
+				<button
+					#templateTab
+					data-tab="REPLACE_NAME_TAB"
+					class="tablink tab-hidden"
+					(click)="onClickTab('REPLACE_NAME_TAB')"
+				>
+					REPLACE_NAME_DISPLAY
+				</button>
+			</div>
+			<div class="metadata-annotation-form-menu-buttons">
+				<button hover [disabled]="!saveEnabled" class="biodaten-button menu-button save" (click)="onClickSave()">
+					Save
+				</button>
+				<!-- <button hover class="biodaten-button menu-button reset" (click)="onClickReset()">
+					Reset
+				</button> -->
+
+				<!-- <button hover class="biodaten-button menu-button" (click)="onClickTest()">
+					Test
+				</button> -->
+			</div>
+
+			<div class="metadata-annotation-form-menu-settings" [hidden]="currentTab != 'settings'">
+
+				<div class="metadata-annotation-form-menu-server-address">
+					<span>Processor Server Address:</span>
+					<input #inputProcessorServerAddress type="text" placeholder="Processor Server Address" [(ngModel)]="serverAddress" />
+					<span>Processor Server Address XML Parse:</span>
+					<input #inputProcessorServerAddress type="text" placeholder="Processor Server Address XML Parse" [(ngModel)]="serverAdressXMLInput" />
+					<span>Processor Server Address XML Link:</span>
+					<input #inputProcessorServerAddress type="text" placeholder="Processor Server Address XML Parse" [(ngModel)]="serverAdressXMLAddress" />
+				</div>
+
+				<div class="metadata-annotation-form-menu-autocomplete">
+					<label for="input-activate-auto-complete">Activate autocomplete:</label>
+					<input #inputActivateAutoComplete id="input-activate-auto-complete" type="checkbox" [(ngModel)]="toggleAutoComplete" />
+				</div>
+
+			</div>
+
+
+		</div>
+	</div>
+
+	<div class="metadata-annotation-form-content-wrap">
+		<div [hidden]="hideSettings" data-tab="settings" class="content-block tabcontent active">
+
+			<div class="content-inner-block">
+
+				<form class="parse-single-file" (ngSubmit)="onSubmitMultipleFiles()">
+
+					<div class="form-input">
+						<span class="button-heading">Select a content file (.xml)</span>
+						<label class="custom-file-input biodaten-button">
+							<input #inputFilesXML (change)="onChangeFileInput(inputFilesXML)" type="file" accept=".xml" />
+							<span class="custom-file-input-title">XML file</span>
+						</label>
+					</div>
+
+					<div class="form-submit">
+						<input hover class="biodaten-button" type="submit" value="Load schemas" />
+					</div>
+				</form>
+
+			</div>
+
+			<div class="content-inner-block">
+
+				<form class="parse-single-file" (ngSubmit)="onSubmitMultipleTemplates()">
+
+					<div class="form-input">
+						<span class="button-heading">Add additional templates (.xsd)</span>
+						<label class="custom-file-input biodaten-button">
+							<input #inputFilesTemplate (change)="onChangeFileInput(inputFilesTemplate)" type="file" accept=".xsd" multiple />
+							<span class="custom-file-input-title">Templates file</span>
+						</label>
+					</div>
+
+					<div class="form-submit">
+						<input hover class="biodaten-button" type="submit" value="Load templates" />
+					</div>
+				</form>
+
+			</div>
+
+			<div class="content-inner-block">
+
+				<span class="small-content-heading">Link to Resource:</span>
+				<a href (click)="onClickResourceLink($event)">22586-5596337946-21147</a>
+
+			</div>
+		</div>
+
+		<div data-tab="REPLACE_NAME_TAB" class="content-block tabcontent" #templateTabContent>
+
+		</div>
+	</div>
+
+	<div class="metadata-annotation-form-mobile-buttons-wrap">
+		<button hover [disabled]="!saveEnabled" class="biodaten-button menu-button save" (click)="onClickSave()">
+			Save
+		</button>
+		<!-- <button hover class="biodaten-button menu-button reset" (click)="onClickReset()">
+			Reset
+		</button> -->
+
+		<!-- <button hover class="biodaten-button menu-button" (click)="onClickTest()">
+			Test
+		</button> -->
+	</div>
+</div>

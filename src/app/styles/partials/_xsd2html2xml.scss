@@ -1,0 +1,277 @@
+@import "../shared_variables";
+@import "../mixins";
+
+.xsd2html2xml {
+
+	> section {
+		> fieldset {
+			border: none;
+			padding: 0;
+			margin: 0;
+		}
+	}
+
+	fieldset {
+
+		clear: both;
+
+		border: 1px solid $borderGrey;
+
+		@include border-radius(3px);
+
+		legend {
+			float: left;
+			display: flex;
+			justify-content: space-between;
+			align-items: baseline;
+
+			padding: 4px 0px;
+
+			width: 100%;
+
+			font-weight: $fontWeightLegend;
+
+			word-break: break-word;
+
+			&.child-span-removed {
+				font-weight: normal;
+			}
+		}
+
+		section,
+		label {
+			clear: both;
+			position: relative;
+		}
+
+		section {
+
+			display: flex;
+			flex-direction: column;
+
+			> fieldset {
+
+				> section {
+
+					> button.add {
+						width: auto;
+
+						margin: 8px 0;
+					}
+				}
+
+			}
+
+		}
+	}
+
+	label {
+		display: flex;
+		flex-direction: column-reverse;
+		align-items: flex-start;
+		margin: 8px 0;
+
+		&.stretch {
+			flex-direction: row;
+    		align-items: stretch;
+
+			input[type="radio"] {
+				margin-right: 6px;
+			}
+		}
+
+		span {
+			margin-bottom: 1px;
+		}
+	}
+
+	section {
+		margin: 0;
+		@include addMarginBottom(medium);
+
+		fieldset {
+			margin: 0;
+			@include addMarginBottom(medium);
+		}
+	}
+
+
+	button {
+
+		&.add {
+			width: 100%;
+			text-align: left;
+			background: transparent;
+			border: 1px solid $borderGrey;
+			padding: 6px 8px;
+
+			// float: left;
+			// display: block;
+			// clear: both;
+
+			align-self: flex-start;
+
+			@include border-radius(3px);
+		}
+
+	}
+
+	legend {
+		> button {
+			margin: 0;
+
+			word-break: normal;
+		}
+	}
+
+	input, select {
+
+		@include respond-below(sm) {
+			width: 100%;
+		}
+
+		@include respond-above(sm) {
+			min-width: 340px;
+		}
+
+		&[type="radio"],
+		&[type="date"] {
+			min-width: auto;
+
+			width: auto;
+		}
+	}
+
+
+	button {
+
+		&:hover {
+			cursor: pointer;
+		}
+
+		&[type='submit'] {
+
+			&:before {
+				content: "OK";
+			}
+		}
+
+		&.add {
+
+			&:before {
+				content: "+ ";
+			}
+		}
+
+		&.remove {
+
+			background: none;
+			border: none;
+
+			text-decoration: underline;
+
+			margin-left: 10px;
+
+			&:hover, &:active, .tab_focus &:focus {
+				/*TODO*/
+			}
+
+			&:before {
+				content: "Remove";
+			}
+		}
+	}
+
+	input[data-xsd2html2xml-duration='days'] + span:after {
+		content: " (days)";
+	}
+	input[data-xsd2html2xml-duration='minutes'] + span:after {
+		content: " (minutes)";
+	}
+
+	button[type="submit"] {
+		display: none;
+	}
+
+	/* FLEX */
+	.metadata-form-flex-layout & {
+
+		fieldset:not([data-xsd2html2xml-xpath="/cmdp:BiodatenMinimal"]) {
+			@include respond-above(xxl) {
+
+				fieldset {
+					display: flex;
+					flex-wrap: wrap;
+
+					&[data-input-section-even-odd="even"] {
+
+						> section.input-section {
+
+							&:last-child,
+							&:nth-last-child(2) {
+								margin-bottom: 0;
+							}
+						}
+					}
+
+					&[data-input-section-even-odd="odd"] {
+
+						> section.input-section {
+
+							&:last-child {
+								margin-bottom: 0;
+							}
+						}
+					}
+
+					div.break {
+						flex-basis: 100%;
+					}
+
+					> legend {
+						flex: 100%;
+					}
+
+					> label {
+						flex: 50%;
+
+						&.stretch {
+							flex: 100%;
+						}
+					}
+
+					> section {
+
+						flex: 100%;
+
+						&.input-section {
+							flex: 50%;
+
+							justify-content: flex-end;
+
+							&.odd {
+								padding-right: 26px;
+							}
+
+							&.even {
+
+								.autocomplete-popout-description-wrap {
+									width: 200px;
+
+									@include respond-above(xxxl) {
+										width: 260px;
+									}
+
+									@include respond-above(xxxxl) {
+										width: 300px;
+									}
+								}
+							}
+						}
+
+					}
+				}
+			}
+		}
+	}
+}

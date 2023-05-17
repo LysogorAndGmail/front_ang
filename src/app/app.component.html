@@ -1,0 +1,19 @@
+<mat-sidenav-container class="side-nav-wrap-container">
+	<mat-sidenav #sidenav class="side-nav" mode="over" position="end" (openedChange)="onMenuOpenedChange($event)" [opened]="currentMenuToggle">
+		<app-side-nav></app-side-nav>
+	</mat-sidenav>
+	<mat-sidenav-content class="side-nav-content">
+		<app-header></app-header>
+		<main role="main" class="main-content">
+			<router-outlet>
+				<div class="user-notice" *ngIf="!userLoggedIn">
+					Please login to use the application.
+				</div>
+			</router-outlet>
+		</main>
+		<app-footer></app-footer>
+	</mat-sidenav-content>
+</mat-sidenav-container>
+
+<app-alert></app-alert>
+

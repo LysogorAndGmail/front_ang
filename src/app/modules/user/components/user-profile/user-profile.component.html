@@ -1,0 +1,17 @@
+<div class="user-profile-outer-wrap">
+
+	<div class="user-profile-information-wrap" *ngIf="userInformation">
+
+		<div class="user-profile-information-logged-in-as" *ngIf="userInformation.given_name && userInformation.family_name">
+			Logged in as: <span class="bold">{{ userInformation.given_name }} {{ userInformation.family_name }}</span>
+		</div>
+
+		<div class="user-profile-links-wrap">
+
+			<div class="user-profile-links-api-key-wrap">
+				<a class="link-button biodaten-button" routerLink="api-key">Token management</a>
+			</div>
+		</div>
+
+	</div>
+</div>
